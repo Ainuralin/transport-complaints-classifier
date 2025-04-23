@@ -11,8 +11,8 @@ This repository contains a simple NLP pipeline for classifying public transport 
 transport-complaints-classifier/
 ├── AI_dataset.xlsx            # Original dataset (reviews in Russian & Kazakh)
 ├── AI_dataset_labeled.xlsx    # Output after keyword-based labeling
-├── label.py                       # Script for labeling reviews
-├── model.py                       # Script for analysis & visualization
+├── label.py                   # Script for labeling reviews
+├── model.py                   # Script for analysis & visualization
 ├── README.md                  # Project overview and instructions
 └── requirements.txt           # Python dependencies
 ```
