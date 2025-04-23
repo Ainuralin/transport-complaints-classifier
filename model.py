@@ -7,7 +7,6 @@ from collections import Counter
 import nltk
 from nltk.stem import WordNetLemmatizer
 import re
-import numpy as np
 
 df_labeled = pd.read_excel("AI_dataset_labeled.xlsx")
 df_labeled.dropna(subset=['label', 'Описание'], inplace=True)
