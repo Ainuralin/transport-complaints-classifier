@@ -7,6 +7,9 @@ from collections import Counter
 import nltk
 from nltk.stem import WordNetLemmatizer
 import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
 
 df_labeled = pd.read_excel("AI_dataset_labeled.xlsx")
 df_labeled.dropna(subset=['label', 'Описание'], inplace=True)
@@ -14,36 +17,6 @@ df_labeled['label'] = df_labeled['label'].astype(int)
 df_labeled['text_lower'] = df_labeled['Описание'].astype(str).str.lower()
 
 X_train, X_test, y_train, y_test = train_test_split(df_labeled['text_lower'], df_labeled['label'], test_size=0.3, random_state=42)
-
-def get_label(index):
-    return df_labeled.loc[index, 'label']
-
-y_pred_series = X_test.index.map(get_label).dropna().astype(int)
-temp_df = pd.DataFrame({'predicted': X_test.index.map(get_label), 'actual': y_test})
-temp_df.dropna(subset=['predicted'], inplace=True)
-temp_df['predicted'] = temp_df['predicted'].astype(int)
-y_pred_aligned = temp_df['predicted']
-y_test_aligned = temp_df['actual'].loc[y_pred_aligned.index]
-
-cm = confusion_matrix(y_test_aligned, y_pred_series)
-print("\nМатрица ошибок:\n", cm)
-
-plt.figure(figsize=(6, 5))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-            xticklabels=['Отрицательный', 'Положительный'], yticklabels=['Отрицательный', 'Положительный'])
-plt.title('Матрица ошибок (на основе классификации по ключевым словам)')
-plt.ylabel('Фактические метки')
-plt.xlabel('Предсказанные метки')
-plt.show()
-
-print("\nОтчет о классификации (на основе классификации по ключевым словам):\n", classification_report(y_test_aligned, y_pred_series))
-
-plt.figure(figsize=(6, 4))
-sns.countplot(x='label', data=df_labeled)
-plt.title('Распределение тональности отзывов')
-plt.xlabel('Метка (0: Отрицательный, 1: Положительный)')
-plt.ylabel('Количество отзывов')
-plt.show()
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -62,6 +35,30 @@ def preprocess_text(text):
     return ""
 
 df_labeled['text_cleaned'] = df_labeled['Описание'].astype(str).apply(preprocess_text)
+
+model = make_pipeline(TfidfVectorizer(), MultinomialNB())
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print("\nМатрица ошибок:\n", confusion_matrix(y_test, y_pred))
+
+plt.figure(figsize=(6, 5))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Отрицательный', 'Положительный'], yticklabels=['Отрицательный', 'Положительный'])
+plt.title('Матрица ошибок (с использованием Naive Bayes)')
+plt.ylabel('Фактические метки')
+plt.xlabel('Предсказанные метки')
+plt.show()
+
+print("\nОтчет о классификации:\n", classification_report(y_test, y_pred))
+
+plt.figure(figsize=(6, 4))
+sns.countplot(x='label', data=df_labeled)
+plt.title('Распределение тональности отзывов')
+plt.xlabel('Метка (0: Отрицательный, 1: Положительный)')
+plt.ylabel('Количество отзывов')
+plt.show()
 
 positive_reviews = " ".join(df_labeled[df_labeled['label'] == 1]['text_cleaned'].dropna())
 negative_reviews = " ".join(df_labeled[df_labeled['label'] == 0]['text_cleaned'].dropna())
