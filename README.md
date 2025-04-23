@@ -77,14 +77,13 @@ The script displays:
 
 ## 📈 Results
 
-- **Keyword-based labeling**: ~48 reviews labeled (44 negative, 4 positive).
-- **Baseline accuracy**: approximately 90% on test split using keyword labels.
+- **Keyword-based labeling**: 148 reviews labeled (146 negative, 2 positive).
+- **Baseline accuracy**: approximately 98% on test split using keyword labels.
 - Visualizations help understand data imbalance and common terms.
 
 ## 🔧 Future Improvements
 
-- Expand keyword lists to improve labeling recall.
-- Train a proper machine learning classifier (e.g., Naive Bayes, Logistic Regression, Transformer-based) on the labeled data.
+- Improve to more advanced machine learning models (e.g., Logistic Regression, Transformer-based).
 - Balance the dataset by adding more positive examples.
 - Integrate into a web app or dashboard for real-time monitoring.
 
