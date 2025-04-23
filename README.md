@@ -52,7 +52,7 @@ This script reads `AI_dataset.xlsx`, converts texts to lowercase, and assigns se
 
 To run:
 ```bash
-python 1.py
+python label.py
 ```
 This generates `AI_dataset_labeled.xlsx` with an added `label` column.
 
@@ -67,7 +67,7 @@ This script loads `AI_dataset_labeled.xlsx`, filters out unlabeled entries, and:
 
 To run:
 ```bash
-python p.py
+python model.py
 ```
 
 The script displays:
@@ -80,16 +80,6 @@ The script displays:
 - **Keyword-based labeling**: ~48 reviews labeled (44 negative, 4 positive).
 - **Baseline accuracy**: approximately 90% on test split using keyword labels.
 - Visualizations help understand data imbalance and common terms.
-
-## 🖥 Video Demonstration
-
-A short video demo is available at: `<YOUR_VIDEO_LINK>`
-
-### What to include:
-1. Loading data and showing sample reviews.
-2. Running `1.py` and examining labeled output.
-3. Running `p.py` to display confusion matrix and charts.
-4. Brief summary of findings.
 
 ## 🔧 Future Improvements
 
