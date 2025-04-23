@@ -11,8 +11,8 @@ This repository contains a simple NLP pipeline for classifying public transport 
 transport-complaints-classifier/
 ├── AI_dataset.xlsx            # Original dataset (reviews in Russian & Kazakh)
 ├── AI_dataset_labeled.xlsx    # Output after keyword-based labeling
-├── 1.py                       # Script for labeling reviews
-├── p.py                       # Script for analysis & visualization
+├── label.py                       # Script for labeling reviews
+├── model.py                       # Script for analysis & visualization
 ├── README.md                  # Project overview and instructions
 └── requirements.txt           # Python dependencies
 ```
@@ -44,7 +44,7 @@ All required Python packages are listed in `requirements.txt`.
 
 ## 🚀 Usage
 
-### 1. Labeling Reviews (`1.py`)
+### 1. Labeling Reviews (`label.py`)
 
 This script reads `AI_dataset.xlsx`, converts texts to lowercase, and assigns sentiment labels:
 - `1` for positive reviews (matches positive keywords in Russian/Kazakh).
@@ -56,7 +56,7 @@ python 1.py
 ```
 This generates `AI_dataset_labeled.xlsx` with an added `label` column.
 
-### 2. Analysis and Visualization (`p.py`)
+### 2. Analysis and Visualization (`model.py`)
 
 This script loads `AI_dataset_labeled.xlsx`, filters out unlabeled entries, and:
 - Splits data into training and test sets.
@@ -104,5 +104,5 @@ Feel free to fork the repository and submit pull requests. For major changes, pl
 
 ## 📄 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License.
 
