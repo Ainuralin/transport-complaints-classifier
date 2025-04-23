@@ -2,8 +2,8 @@
 
 This repository contains a simple NLP pipeline for classifying public transport complaints as positive or negative based on review text written in Russian and Kazakh. It consists of two Python scripts:
 
-- **`1.py`**: Preprocesses and labels the dataset using keyword-based sentiment tagging.
-- **`p.py`**: Loads the labeled data, performs exploratory analysis, and visualizes results (confusion matrix, class distribution, word frequencies).
+- **`label.py`**: Preprocesses and labels the dataset using keyword-based sentiment tagging.
+- **`model.py`**: Loads the labeled data, performs exploratory analysis, and visualizes results (confusion matrix, class distribution, word frequencies).
 
 ## 📂 Project Structure
 
